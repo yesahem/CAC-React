@@ -1,3 +1,6 @@
+//To add a backend functionality to story the desired password in the DB backend 
+
+
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 function App() {
@@ -5,6 +8,7 @@ function App() {
   const [isNumber, setIsNumber] = useState(false);
   const [isSpecialCharacter, setIsSpecialCharacter] = useState(false);
   const [password, setPassword] = useState("")
+  const [copy, setCopy] = useState("Copy")
   const passwordRef = useRef(null)
 
   const passwordGenerator = useCallback(() => {
@@ -31,7 +35,7 @@ function App() {
     passwordRef.current?.select()
     console.log(passwordRef.current)
     window.navigator.clipboard.writeText(password)
-
+    // changeCopyBtn()
   }, [password])
 
   useEffect(() => {
@@ -44,30 +48,18 @@ function App() {
 
   //make the copy button text change to copied! text after button is clicked and text is copied 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  const changeCopyBtn = () => {
+    setCopy("Copied")
+    setTimeout(() => {
+      setCopy("Copy")
+    }, 3000)
+  }
 
 
   return (
     <>
-      <div className='w-full max-w-lg mx-auto shadow-md rounded-lg px-4 py-3 my-8 text-orange-500 bg-gray-700'>
-        <h1 className='text-xl text-white text-center py-2'> Password Generator</h1>
+      <div className='w-full max-w-lg mx-auto shadow-md rounded-lg px-4 py-7 my-8 text-orange-500 bg-gray-700'>
+        <h1 className='text-3xl text-white text-center py-2'> Password Generator</h1>
         <div className='flex shadow rounded-lg overflow-hidden mb-4'>
           <input
             type="text"
@@ -79,10 +71,14 @@ function App() {
 
           />
           <button className='bg-purple-600 text-black px-3 '
-            onClick={copyPassword} >Copy</button>
+            onClick={() => {
+              copyPassword()
+              changeCopyBtn()
+            }}
+          >{copy}</button>
 
 
-        </div>
+        </div >
         <div className='flex text-sm gap-x-3'>
           <div className='flex item-center gap-x-1'>
             <input
@@ -117,7 +113,7 @@ function App() {
             </div>
           </div>
         </div>
-      </div>
+      </div >
     </>
   )
 }
