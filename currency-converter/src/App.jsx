@@ -10,6 +10,7 @@ function App() {
   const [convertedAmount, setConvertedAmount] = useState(0)
   const currencyInfo = useCurrencyInfo(from)
   const options = Object.keys(currencyInfo)
+  { console.log(options) }
   const swapValues = () => {
     setFrom(to)
     setTo(from)
@@ -41,9 +42,10 @@ function App() {
               <InputField
                 label="From"
                 amount={amount}
-                currencyOption={options}
-                onCurrencyChange={(currency) => setAmount(amount)}
+                currencyOptions={options}
                 selectCurrency={from}
+                onCurrencyChange={(currency) => setFrom(currency)}
+                onAmountChange={(amount) => setAmount(amount)}
 
               />
             </div>
@@ -60,14 +62,15 @@ function App() {
               <InputField
                 label="To"
                 amount={convertedAmount}
-                currencyOption={options}
+                currencyOptions={options}
                 onCurrencyChange={(currency) => setTo(currency)}
-                selectCurrency={from}
+                selectCurrency={to}
                 amountDisabled
+
               />
             </div>
             <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
-              Convert {from.toUpperCase()} to {from.toUpperCase()}
+              Convert {from.toUpperCase()} to {to.toUpperCase()}
             </button>
           </form>
         </div>
