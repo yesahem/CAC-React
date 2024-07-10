@@ -10,7 +10,6 @@ function App() {
   const [convertedAmount, setConvertedAmount] = useState(0)
   const currencyInfo = useCurrencyInfo(from)
   const options = Object.keys(currencyInfo)
-  { console.log(options) }
   const swapValues = () => {
     setFrom(to)
     setTo(from)
@@ -20,7 +19,6 @@ function App() {
   }
 
   const convert = () => {
-    console.log(currencyInfo)
     setConvertedAmount(amount * currencyInfo[to])
   }
   return (
@@ -68,6 +66,7 @@ function App() {
                 amountDisabled
 
               />
+
             </div>
             <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
               Convert {from.toUpperCase()} to {to.toUpperCase()}
